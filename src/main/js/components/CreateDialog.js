@@ -1,5 +1,5 @@
 const React = require('react');
-const ReactDOM = requrie('react-dom');
+const ReactDOM = require('react-dom');
 
 class CreateDialog extends React.Component {
 
