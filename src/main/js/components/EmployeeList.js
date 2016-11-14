@@ -46,7 +46,11 @@ class EmployeeList extends React.Component {
 
   render() {
     var employees = this.props.employees.map(employee =>
-      <Employee key={ employee._links.self.href } employee={ employee } onDelete={ this.props.onDelete } />
+      <Employee key={ employee.entity._links.self.href }
+                employee={ employee }
+                attributes={ this.props.attributes }
+                onUpdate={ this.props.onUpdate }
+                onDelete={ this.props.onDelete } />
     );
 
     var navLinks = [];

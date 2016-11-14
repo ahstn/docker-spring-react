@@ -1,10 +1,12 @@
 package io.ahouston.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 /**
  * Basic Employee entity
@@ -17,6 +19,8 @@ public class Employee {
     private String forename;
     private String surname;
     private String description;
+
+    private @Version @JsonIgnore Long version;
 
     private Employee() {}
 

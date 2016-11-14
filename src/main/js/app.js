@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const when = require('when');
 
 const EmployeeList = require('./components/EmployeeList');
 const CreateDialog = require('./components/CreateDialog');
@@ -13,6 +14,7 @@ class App extends React.Component {
     this.state = { employees: [], attributes: [], pageSize: 2, links: {} };
     this.updatePageSize = this.updatePageSize.bind(this);
     this.onCreate = this.onCreate.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.onNavigate = this.onNavigate.bind(this);
   }
@@ -26,14 +28,24 @@ class App extends React.Component {
           headers: { 'Accept': 'application/schema+json' }
         }).then(schema => {
           this.schema = schema.entity;
+          this.links = employeeCollection.entity._links;
           return employeeCollection;
         });
-      }).done(employeeCollection => {
+      }).then(employeeCollection => {
+        return employeeCollection.entity._embedded.employees.map(employee =>
+          client({
+            method: 'GET',
+            path: employee._links.self.href
+          })
+        );
+      }).then(employeePromises => {
+        return when.all(employeePromises);
+      }).done(employees => {
         this.setState({
-          employees: employeeCollection.entity._embedded.employees,
+          employees: employees,
           attributes: Object.keys(this.schema.properties),
           pageSize: pageSize,
-          links: employeeCollection.entity._links
+          links: this.links
         });
       });
   }
@@ -52,6 +64,25 @@ class App extends React.Component {
       }).done(response => {
         this.onNavigate(response.entity._links.last.href);
       });
+  }
+
+  onUpdate(employee, updatedEmployee) {
+    client({
+      method: 'PUT',
+      path: employee.entity._links.self.href,
+      entity: updatedEmployee,
+      headers: {
+        'Content-Type': 'application/json',
+        'If-Match': employee.headers.Etag
+      }
+    }).done(response => {
+      this.loadFromServer(this.state.pageSize);
+    }, response => {
+      if (response.status.code === 412) {
+        alert('DENIED: Unable to update ' +
+          employee.entity._links.self.href + '. Your copy is stale.');
+      }
+    });
   }
 
   onNavigate(navUri) {
@@ -90,7 +121,9 @@ class App extends React.Component {
         <EmployeeList employees={ this.state.employees }
           links={ this.state.links }
           pageSize={ this.state.pageSize }
+          attributes={ this.state.attributes }
           onNavigate={ this.onNavigate }
+          onUpdate={ this.onUpdate }
           onDelete={ this.onDelete }
           updatePageSize={ this.updatePageSize } />
       </div>
