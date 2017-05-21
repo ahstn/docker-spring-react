@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Adam Houston
  */
 @SpringBootApplication
-public class ApexApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApexApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }
