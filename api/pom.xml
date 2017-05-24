@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.ahouston</groupId>
-	<artifactId>apex</artifactId>
+	<artifactId>dsr_api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>apex</name>
+	<name>dsr_api</name>
 	<description>Simple Spring Boot API</description>
 
 	<parent>

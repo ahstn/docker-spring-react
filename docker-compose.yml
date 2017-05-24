@@ -1,0 +1,36 @@
+version: "3.1"
+
+services:
+  db:
+    image: dsr_db
+    restart: unless-stopped
+    build:
+      context: ./postgres/
+    ports:
+      - "5432:5432"
+    networks:
+      - dsr
+
+  api:
+    image: dsr_api
+    ports:
+      - "8080:8080"
+    networks:
+      - dsr
+    depends_on:
+      - db
+
+  frontend:
+    image: dsr_frontend
+    build:
+      context: ./frontend/
+    ports:
+      - "8080:8080"
+    networks:
+      - dsr
+    depends_on:
+      - api
+
+networks:
+  dsr:
+    driver: overlay
