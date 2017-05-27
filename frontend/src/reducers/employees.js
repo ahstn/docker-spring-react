@@ -1,19 +1,18 @@
-import {
-  EMPLOYEES_LOADED,
-  EMPLOYEES_UNLOADED,
-  EMPLOYEES_ADD,
-  EMPLOYEES_DELETE
-} from '../constants/actionTypes';
+const initialState = {
+  fetching: false,
+  fetched: false,
+  employees: [],
+  error: null
+}
 
-export default (state = {}, action) => {
-  switch (action.type) {
-    case EMPLOYEES_LOADED:
-      return {
-        ...state,
-        employee: action.payload[0].employee
-      };
-    case EMPLOYEES_UNLOADED:
-      return {};
+export default (state = initialState, action) => {
+  switch(action.type) {
+    case "FETCH_EMPLOYEES_PENDING":
+      return {...state, fetching: true}
+    case "FETCH_EMPLOYEES_REJECTED":
+      return {...state, fetching: false, fetched: false, error: action.payload}
+    case "EMPLOYEES_FULFILLED":
+      return {...state, fetching: false, fetched: true, employees: action.payload}
     default:
       return state;
   }
