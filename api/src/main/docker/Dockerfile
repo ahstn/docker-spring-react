@@ -1,6 +1,7 @@
 FROM openjdk:8-jre-alpine
 
-COPY *.jar /
+WORKDIR /app
+COPY dsr_api.jar /app
 
-EXPOSE 5555
-ENTRYPOINT [ "sh", "-c", "java -Djava.security.egd=file:/dev/./urandom -jar /api.jar" ]
+EXPOSE 8080
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "dsr_api.jar"]
