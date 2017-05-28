@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import axios from "axios";
 
+import EmployeeList from '../Employees/EmployeeList'
 import logo from './logo.svg';
 import './App.css';
 
 const mapStateToProps = state => ({
-  employees: state.employees
+  employees: state.employees.employees.data
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -31,6 +32,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <EmployeeList employees={this.props.employees} />
       </div>
     );
   }
