@@ -5,25 +5,22 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**WIP** with the end goal being a RESTful API using Spring Boot, Spring Data, React, Redux, Postgres and Docker with Compose
-
-
-### Status
+### Status (WIP)
 - API (Java - Spring Boot)
-  [x] CRUD Endpoints
-  [ ] Tests
-  [x] Dockerised
-  [ ] Postgres Integration (Uses in-memory db for now)
+  - [x] CRUD Endpoints
+  - [ ] Tests
+  - [x] Dockerised
+  - [ ] Postgres Integration (Uses in-memory db for now)
 
 - Frontend (Javascript - React Redux)
-  [ ] CRUD Endpoints
-  [ ] Tests
-  [ ] Styling
-  [x] Dockerised
+  - [ ] CRUD Endpoints
+  - [ ] Tests
+  - [ ] Styling
+  - [x] Dockerised
 
 - Database (PostgreSQL)
-  [x] Dockerised (For quick development)
-  [ ] Updated employees schema
+  - [x] Dockerised (For quick development)
+  - [ ] Updated employees schema
 
 - Docker Compose
-  [ ] All services running and tested
+  - [ ] All services running and tested
