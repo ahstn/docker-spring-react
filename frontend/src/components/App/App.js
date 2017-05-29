@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import axios from "axios";
 
 import EmployeeList from '../Employees/EmployeeList'
+import { fetchEmployees } from '../../actions/employees'
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,10 +12,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch({
-    type: "EMPLOYEES",
-    payload: axios.get("http://localhost:8080/api/employees")
-  })
+  onLoad: () => dispatch(fetchEmployees())
 })
 
 class App extends Component {

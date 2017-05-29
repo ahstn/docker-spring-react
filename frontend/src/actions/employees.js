@@ -1,9 +1,10 @@
-import superagentPromise from 'superagent-promise';
-import _superagent from 'superagent';
+import axios from "axios";
 
-const superagent = superagentPromise(_superagent, global.Promise);
+import { API_ROOT } from '../constants/environment';
 
-const API_ROOT = 'http://localhost:8080/api';
-
-const encode = encodeURIComponent;
-const responseBody = res => res.body;
+export function fetchEmployees() {
+  return {
+    type: "EMPLOYEES",
+    payload: axios.get(API_ROOT + '/employees')
+  }
+}
