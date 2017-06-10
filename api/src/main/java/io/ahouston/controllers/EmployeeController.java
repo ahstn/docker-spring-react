@@ -39,4 +39,10 @@ public class EmployeeController {
     public ResponseEntity<?> addEmployee(@RequestBody Employee input) {
         return new ResponseEntity<>(repository.save(input), HttpStatus.CREATED);
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+        repository.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
