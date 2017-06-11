@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import axios from "axios";
+import { connect } from 'react-redux';
 
-import EmployeeList from '../Employees/EmployeeList'
-import { fetchEmployees } from '../../actions/employees'
+import EmployeeList from '../Employees/EmployeeList';
+import { fetchEmployees, deleteEmployee } from '../../actions/employees';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,7 +11,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch(fetchEmployees())
+  onLoad: () => dispatch(fetchEmployees()),
+  onDeleteClick: (id) => dispatch(deleteEmployee(id))
 })
 
 class App extends Component {
@@ -30,7 +30,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <EmployeeList employees={this.props.employees} />
+        <EmployeeList employees={this.props.employees}
+                      onDeleteClick={this.props.onDeleteClick}/>
       </div>
     );
   }

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './Employee.css';
 
 class EmployeeList extends Component {
+  delete(id) {
+    console.log(id);
+  }
+
   render() {
     const {employees} = this.props
     if (!employees || !employees._embedded) { return null; }
@@ -17,9 +21,15 @@ class EmployeeList extends Component {
           </thead>
           <tbody>
           { employees._embedded.employees.map((employee) =>
-            <tr>
+            <tr key={employee.id}>
               <td>{employee.forename}</td>
               <td>{employee.surname}</td>
+              <td>
+                <i className="material-icons"
+                   onClick={() => this.props.onDeleteClick(employee.id)}>
+                  delete
+                </i>
+              </td>
             </tr>
           )}
           </tbody>
