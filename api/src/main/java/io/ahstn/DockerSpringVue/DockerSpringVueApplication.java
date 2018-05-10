@@ -1,16 +1,12 @@
-package io.ahouston;
+package io.ahstn.DockerSpringVue;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Application entry point
- * @author Adam Houston
- */
 @SpringBootApplication
-public class Application {
+public class DockerSpringVueApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(DockerSpringVueApplication.class, args);
 	}
 }
