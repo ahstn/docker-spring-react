@@ -1,16 +1,16 @@
-import { applyMiddleware, createStore } from 'redux';
-import { createLogger } from 'redux-logger';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
-import promise from 'redux-promise-middleware';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-import reducer from './reducer';
+Vue.use(Vuex)
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(promise(), thunk, createLogger()),
-  )
-);
+export default new Vuex.Store({
+  state: {
 
-export default store;
+  },
+  mutations: {
+
+  },
+  actions: {
+
+  }
+})
