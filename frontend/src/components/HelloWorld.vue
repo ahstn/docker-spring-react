@@ -1,14 +1,31 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <div v-if="users" v-for="(user, index) in users" v-bind:key="index">
+      <span>{{ user.email }}</span>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { FETCH_USERS } from '../store/user.mutations'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  computed: {
+    ...mapGetters([ 'users' ])
+  },
+  mounted () {
+    this.fetchUsers()
+  },
+  methods: {
+    fetchUsers () {
+      this.$store.dispatch(FETCH_USERS, this.listConfig)
+    }
   }
 }
 </script>
